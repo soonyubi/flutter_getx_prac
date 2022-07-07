@@ -138,7 +138,7 @@ class _DetailPageState extends State<DetailPage> {
                           child: Row(
                         children: [
                           Text(
-                            "Title",
+                            Get.arguments['title'],
                             style: TextStyle(
                                 fontSize: 30, fontWeight: FontWeight.w500),
                           ),
@@ -149,7 +149,7 @@ class _DetailPageState extends State<DetailPage> {
                       Container(
                         width: width,
                         child: Text(
-                          "Text",
+                          Get.arguments['text'],
                           style:
                               TextStyle(fontSize: 20, color: Color(0xFFb8b8b8)),
                         ),
@@ -178,7 +178,7 @@ class _DetailPageState extends State<DetailPage> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    "name",
+                                    Get.arguments['name'],
                                     style: TextStyle(
                                         fontSize: 18,
                                         color: Color(0xFF303030),
@@ -206,7 +206,7 @@ class _DetailPageState extends State<DetailPage> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    "499",
+                                    Get.arguments['prize'],
                                     style: TextStyle(
                                         fontSize: 18,
                                         color: Color(0xFF303030),
