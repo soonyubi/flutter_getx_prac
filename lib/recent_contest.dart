@@ -36,9 +36,13 @@ class _RecentContestState extends State<RecentContest> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+            onPressed: () => Get.back(), icon: Icon(Icons.arrow_back_ios)),
+      ),
       backgroundColor: Color(0xffcbe6f6),
       body: Container(
-        margin: const EdgeInsets.only(left: 20, top: 100, right: 20),
+        margin: const EdgeInsets.only(left: 20, top: 10, right: 20),
         child: Column(
           children: [
             Expanded(
