@@ -15,6 +15,24 @@ class DetailPage extends StatefulWidget {
 }
 
 class _DetailPageState extends State<DetailPage> {
+  List imgs = [];
+
+  _readData() async {
+    await DefaultAssetBundle.of(context)
+        .loadString('json/img.json')
+        .then((value) {
+      setState(() {
+        imgs = json.decode(value);
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    _readData();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -29,7 +47,7 @@ class _DetailPageState extends State<DetailPage> {
                 top: 50,
                 left: 10,
                 child: IconButton(
-                  onPressed: () => Get.back(),
+                  onPressed: () => Get.to(() => ContentPage()),
                   icon: Icon(Icons.arrow_back_ios),
                 )),
             Positioned(
@@ -51,7 +69,7 @@ class _DetailPageState extends State<DetailPage> {
                     children: [
                       CircleAvatar(
                         radius: 40,
-                        backgroundImage: AssetImage("img/background.jpg"),
+                        backgroundImage: AssetImage(Get.arguments['img']),
                       ),
                       SizedBox(
                         width: 10,
@@ -61,7 +79,7 @@ class _DetailPageState extends State<DetailPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "name",
+                            Get.arguments['name'],
                             style: TextStyle(
                                 color: Color(0xFF3b3f42),
                                 fontSize: 18,
@@ -138,7 +156,7 @@ class _DetailPageState extends State<DetailPage> {
                           child: Row(
                         children: [
                           Text(
-                            "Title",
+                            Get.arguments['title'],
                             style: TextStyle(
                                 fontSize: 30, fontWeight: FontWeight.w500),
                           ),
@@ -149,7 +167,7 @@ class _DetailPageState extends State<DetailPage> {
                       Container(
                         width: width,
                         child: Text(
-                          "Text",
+                          Get.arguments['text'],
                           style:
                               TextStyle(fontSize: 20, color: Color(0xFFb8b8b8)),
                         ),
@@ -178,7 +196,7 @@ class _DetailPageState extends State<DetailPage> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    "name",
+                                    Get.arguments['name'],
                                     style: TextStyle(
                                         fontSize: 18,
                                         color: Color(0xFF303030),
@@ -206,7 +224,7 @@ class _DetailPageState extends State<DetailPage> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    "499",
+                                    Get.arguments['prize'],
                                     style: TextStyle(
                                         fontSize: 18,
                                         color: Color(0xFF303030),
@@ -275,7 +293,7 @@ class _DetailPageState extends State<DetailPage> {
                 )),
             //images
             Stack(children: [
-              for (int i = 0; i < 5; i++)
+              for (int i = 0; i < imgs.length; i++)
                 Positioned(
                   top: 590,
                   left: (20 + i * 35).toDouble(),
@@ -285,7 +303,7 @@ class _DetailPageState extends State<DetailPage> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(25),
                         image: DecorationImage(
-                            image: AssetImage("img/background.jpg"),
+                            image: AssetImage(imgs[i]['img']),
                             fit: BoxFit.cover)),
                   ),
                 )
