@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_getx_prac/recent_contest.dart';
 import 'package:get/get.dart';
 
 import 'my_detail_page.dart';
@@ -263,7 +264,15 @@ class _ContentPageState extends State<ContentPage> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         color: Color(0xFFfdc33c)),
-                    child: GestureDetector(),
+                    child: GestureDetector(
+                      child: Icon(
+                        Icons.arrow_forward_ios,
+                        color: Colors.white,
+                      ),
+                      onTap: () {
+                        Get.to(() => RecentContest());
+                      },
+                    ),
                   )
                 ],
               ),
@@ -278,7 +287,7 @@ class _ContentPageState extends State<ContentPage> {
                     child: ListView.builder(
                         shrinkWrap: true,
                         scrollDirection: Axis.vertical,
-                        itemCount: 4,
+                        itemCount: list.length,
                         itemBuilder: (_, i) {
                           return Container(
                             width: width,
@@ -296,8 +305,7 @@ class _ContentPageState extends State<ContentPage> {
                                 children: [
                                   CircleAvatar(
                                     radius: 40,
-                                    backgroundImage:
-                                        AssetImage("img/background.jpg"),
+                                    backgroundImage: AssetImage(list[i]['img']),
                                   ),
                                   SizedBox(
                                     width: 10,
@@ -308,10 +316,10 @@ class _ContentPageState extends State<ContentPage> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        "Status",
+                                        list[i]['status'],
                                         style: TextStyle(
-                                            color: Color(0xFFfdebb2),
-                                            fontSize: 12,
+                                            color: Colors.orangeAccent,
+                                            fontSize: 18,
                                             decoration: TextDecoration.none),
                                       ),
                                       SizedBox(
@@ -320,7 +328,7 @@ class _ContentPageState extends State<ContentPage> {
                                       SizedBox(
                                         width: 170,
                                         child: Text(
-                                          "Text",
+                                          list[i]['text'],
                                           style: TextStyle(
                                               color: Color(0xFF3b3f42),
                                               fontSize: 18,
@@ -331,8 +339,8 @@ class _ContentPageState extends State<ContentPage> {
                                   ),
                                   Expanded(child: Container()),
                                   Container(
-                                    width: 70,
-                                    height: 70,
+                                    width: 40,
+                                    height: 40,
                                     child: Text(
                                       "Time",
                                       style: TextStyle(
